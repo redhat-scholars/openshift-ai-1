@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Data Science Pipeline :: OpenShift AI Part 1</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/openshift-ai-1/openshift-ai-one-tutorial/04-pipelines.html">
+    <link rel="prev" href="03-ai.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://redhat-scholars.github.io/openshift-ai-1">OpenShift AI Part 1</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="openshift-ai-one-tutorial" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-setup.html">1. Get Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-setup.html#prerequisite">Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-setup.html#downloadtutorial">Get tutorial sources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-intro.html">2. Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-intro.html#openshiftai">OpenShift AI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-ai.html">3. OpenShift AI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-ai.html#workbench">Creating a workbench</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-ai.html#deploying">Deploying a model</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-pipelines.html">4. Data Science Pipeline</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#enablepipelines">Enabling Data Science Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#runpipelines">Running a Data Science Pipeline</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift AI Part 1</a></li>
+    <li><a href="04-pipelines.html">4. Data Science Pipeline</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-ai-1/edit/master/documentation/modules/ROOT/pages/04-pipelines.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Data Science Pipeline</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Creating pipelines using version-controlled, shareable code is often a preferred approach. The Kubeflow Pipelines (kfp) SDK offers a Python API for building pipelines, which is available as a Python package that can be installed via the pip install kfp command.
+Using this package, you can write Python code to define a pipeline, compile it into YAML format, and then import it into OpenShift AI.</p>
+</div>
+<div class="paragraph">
+<p>This deep dive does not focus on the specifics of using the SDK.
+Instead, it supplies the necessary files for you to review and upload.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enablepipelines"><a class="anchor" href="#enablepipelines"></a>Enabling Data Science Pipelines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section, you prepare your environment to train a model automatically using data science pipelines.</p>
+</div>
+<div class="paragraph">
+<p>In the OpenShift AI dashboard, on the Fraud Detection page, click the <em>Pipelines</em> tab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-menu.png" alt="Pipelines" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Click <em>Configure pipeline server</em> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/create-pipeline-server.png" alt="Create Pipeline" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>In the <strong>Configure Pipeline Server</strong> form, locate the <em>Access Key</em> field marked by the key icon.
+Open the dropdown menu and select <em>Pipeline Artifacts</em> to automatically fill the form with the necessary credentials for the connection.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/create-pipeline-server-form.png" alt="Fill Create Pipeline Form" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Click <em>Configure pipeline server</em>, and wait until the loading spinner disappears and <em>Start by importing a pipeline</em> is displayed.
+It is not necessary to click to push the <em>Start by importing a pipeline</em> button, but when enabled, it indicates that the pipeline server is ready.</p>
+</div>
+<div class="paragraph">
+<p>This process might take 5 minutes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="runpipelines"><a class="anchor" href="#runpipelines"></a>Running a Data Science Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>From your Jupyter environment, download the <code>7_get_data_train_upload.py</code> file to your local disk by selecting the file, right-clicking your mouse, and selecting <code>Download</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/download-pipeline.png" alt="Download Pipeline" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, import this file into the created Pipeline, go again to the <strong>Pipelines</strong> tab, and push the <strong>Import Pipeline</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-import.png" alt="Pipeline Import" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Then fill the form with a <strong>Pipeline name</strong> and <strong>Pipeline description</strong>.
+Click <strong>Upload</strong> and select <code>7_get_data_train_upload.yaml</code> from your local files to upload the pipeline.
+Finally, click the <strong>Import pipeline</strong> button to import and save the pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-import-upload.png" alt="Pipeline Import form" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The pipeline is registered but not executed till you create a <em>run</em>.</p>
+</div>
+<div class="paragraph">
+<p>Expand the pipeline item, click the action menu (<strong>⋮</strong>), and then select <strong>View runs</strong>.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="pipeline-view-runs.png" alt="Pipeline Run" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Click <strong>Create run</strong> and fill the form with the following values:</p>
+</div>
+<div class="paragraph">
+<p><strong>Experiment</strong>: leave the default Default value
+<strong>Name</strong>: Run 1
+<strong>Pipeline</strong>: Select the pipeline that you uploaded</p>
+</div>
+<div class="paragraph">
+<p>You can leave the other fields with their default values.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-create-run-form.png" alt="Create Run" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>After creating the run, the pipeline is executed automatically. It gets training data, retrains the model with the new data, and publishes it.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-run-in-progress.png" alt="Create Run" width="600">
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="03-ai.html">3. OpenShift AI</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OpenShift AI :: OpenShift AI Part 1</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/openshift-ai-1/openshift-ai-one-tutorial/03-ai.html">
+    <link rel="prev" href="02-intro.html">
+    <link rel="next" href="04-pipelines.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://redhat-scholars.github.io/openshift-ai-1">OpenShift AI Part 1</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="openshift-ai-one-tutorial" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-setup.html">1. Get Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-setup.html#prerequisite">Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-setup.html#downloadtutorial">Get tutorial sources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-intro.html">2. Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-intro.html#openshiftai">OpenShift AI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-ai.html">3. OpenShift AI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#workbench">Creating a workbench</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deploying">Deploying a model</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-pipelines.html">4. Data Science Pipeline</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-pipelines.html#enablepipelines">Enabling Data Science Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-pipelines.html#runpipelines">Running a Data Science Pipeline</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift AI Part 1</a></li>
+    <li><a href="03-ai.html">3. OpenShift AI</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-ai-1/edit/master/documentation/modules/ROOT/pages/03-ai.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">OpenShift AI</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s prepare the environment to train a model for detecting fraud.
+First of all, let&#8217;s enable data science pipelines.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="workbench"><a class="anchor" href="#workbench"></a>Creating a Workbench</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A workbench is an instance of your development and experimentation environment.
+Within a workbench, you can select a notebook image where the code will run for your data science work.
+It also contains the popular Jupyter Notebook, which is used for coding and running experiments.
+You&#8217;ll use Tensorflow 2024.2 for this exercise, but several others are supported, too.</p>
+</div>
+<div class="paragraph">
+<p>Go to project view again in OpenShift AI, click the <em>Workbenches</em> tab, and then click the <em>Create workbench</em> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-menu.png" alt="Workbenches" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, fill the form with the following parameters:</p>
+</div>
+<div class="paragraph">
+<p><strong>Name</strong>: Fraud Detection</p>
+</div>
+<div class="paragraph">
+<p>In the <strong>Notebook section</strong>:</p>
+</div>
+<div class="paragraph">
+<p><strong>Image selection</strong>: TensorFlow</p>
+</div>
+<div class="paragraph">
+<p><strong>Version selection</strong>: 2024.2</p>
+</div>
+<div class="paragraph">
+<p><strong>Container size</strong>: Small</p>
+</div>
+<div class="paragraph">
+<p>An important part is the <strong>Cluster Storage</strong> part.
+There, you define the volume to keep all workbench data after you log out.
+For this case, you&#8217;ll create a new persistence storage.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/create-persistence.png" alt="Create Persistence" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Name</strong>: Fraud Detection</p>
+</div>
+<div class="paragraph">
+<p><strong>Persistence Storage Size</strong>: 10 Gb</p>
+</div>
+<div class="paragraph">
+<p>Finally, <strong>Under Connections</strong>, select <em>Attach Existing connections</em> and select <code>My Storage</code>.
+This storage was created when Minio was deployed in the previous section.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/attach-connection.png" alt="Connections section" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Click the <em>Create workbench</em> button, and wait till it is <em>Running</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/workbench-list.png" alt="Workbench List" width="600">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jupyter_notebook"><a class="anchor" href="#_jupyter_notebook"></a>Jupyter Notebook</h3>
+<div class="paragraph">
+<p>With the workbench created, you can start the Jupyter Notebook and import the Python code to train the model.</p>
+</div>
+<div class="paragraph">
+<p>Click the <em>Open</em> link next to your workbench, and the Jupyter environment window opens.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s import the project from the Git repository to the Jupyter Notebook. Click the <em>Git Clone</em> icon, set the following URL <code><a href="https://github.com/rh-aiservices-bu/fraud-detection.git" class="bare">https://github.com/rh-aiservices-bu/fraud-detection.git</a></code>, with <em>include submodules</em> option enabled and click <em>Clone</em> button:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jupyter-git-icon.png" alt="Clone Repository" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>After a few seconds, you&#8217;ll see the project in the file explorer:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jupyter-file-browser.png" alt="Project File Browser" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Before you start running code, move to the <strong>v2.16</strong> branch, which contains the code for this deep dive.
+Click on the Git icon in the left menu, select the <strong>origin/v2.16</strong> branch, and set it as current.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jupyter-git-icon-version.png" alt="Select Git branch" width="600">
+</div>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="branch-proect.png" alt="List of branches" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Enter the <code>fraud-detection</code>, and you should see something similar to the following screenshot:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jupyter-file-browser-2.png" alt="Overview of the Project" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Now that you&#8217;re familiar with the functions of the Jupyter notebook environment, it&#8217;s time to dive into the real work.</p>
+</div>
+<div class="paragraph">
+<p>In your notebook environment, open the <code>1_experiment_train.ipynb</code> file, which downloads a CSV file with data to train the model.</p>
+</div>
+<div class="paragraph">
+<p>Open the file by clicking on it:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jupyter-notebook-1.png" alt="Training File" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>You can explore the file, but it is not the focus of this deep dive, so let&#8217;s execute the <code>1_experiment_train.ipynb</code> file and go to the toolbar <strong>Run</strong> &gt; <strong>Run All Cells</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-all.png" alt="Train the Model" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>This process might take around 3 or 4 minutes.
+You can scroll the file to see the progress of the run.</p>
+</div>
+<div class="paragraph">
+<p>Now that the model is trained and placed at <code>models/fraud/1/model.onnx</code>.
+Notice that you generated a model in ONNX format to make it runnable in Red Hat Sandbox OpenShift AI.
+Other formats are also supported, like GUFF, but ONNX is one of the most popular.
+Let&#8217;s infer it.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploying"><a class="anchor" href="#deploying"></a>Deploying a model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After you train a model, you can deploy it using the OpenShift AI model serving capabilities.</p>
+</div>
+<div class="paragraph">
+<p>To deploy the model, you need to store the output model in the Minio instance created in the previous section <a href="02-intro.html#minio" class="xref page">02-intro.adoc#minio</a>.</p>
+</div>
+<div class="paragraph">
+<p>Since you have already attached the workbench to <code>My Storage</code>, open <code>2_save_model.ipynb</code> and run it to upload the model to Minio.
+Go to the toolbar <strong>Run</strong> &gt; *Run All Cells*again.</p>
+</div>
+<div class="paragraph">
+<p>After this run, the model is placed in Minio and can be consumed by any process.</p>
+</div>
+<div class="paragraph">
+<p>Now that the model is stored and saved in the portable ONNX format, you can deploy it as an API using an OpenShift AI model server.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift AI provides two model serving options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Single-model serving: Each model in the project is deployed on its dedicated model server. This approach is ideal for large models or those requiring dedicated resources.</p>
+</li>
+<li>
+<p>Multi-model serving: All project models are deployed on a shared model server. This option is well-suited for sharing resources among multiple models and is the only serving option available in the Red Hat Developer Sandbox environment.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the OpenShift AI dashboard, navigate to the project details page, click the <strong>Models</strong> tab, and click the Add model server button.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="add-model-server.png" alt="Add Model Server" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>In the new form, add the following values:</p>
+</div>
+<div class="paragraph">
+<p><strong>Model server name</strong>: Model Server
+<strong>Serving runtime</strong>: OpenVINO Model Server</p>
+</div>
+<div class="paragraph">
+<p>Leave the other fields with the default settings, and click <strong>Add</strong> to add this server.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/create-model-server-form.png" alt="Add Model Server" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Next to the new model server, click <strong>Deploy model</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/deploy-model.png" alt="Deploy Model" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>In the following screen, you configure where the model is stored and the runtime to use, and you also set a name to the deployed instance.</p>
+</div>
+<div class="paragraph">
+<p><strong>Model deployment name</strong>: fraud</p>
+</div>
+<div class="paragraph">
+<p><strong>Model framework (name - version)</strong>: onnx-1</p>
+</div>
+<div class="paragraph">
+<p>At <strong>Source model location</strong>, select <strong>Existing connection</strong>, and then select <em>My Storage</em> (the one we created previously and where we uploaded the model).</p>
+</div>
+<div class="paragraph">
+<p><strong>Path</strong>: models/fraud</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/deploy-model-form.png" alt="Deploy Model Form" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Click the <strong>Deploy</strong> button to start the inference process of the model.</p>
+</div>
+<div class="paragraph">
+<p>Notice the loading symbol under the <strong>Status</strong> section.
+The symbol changes to a green checkmark when the deployment completes successfully.</p>
+</div>
+<div class="paragraph">
+<p>Also, if you push the <strong>Internal endpoint details</strong> link, you&#8217;ll see the internal endpoint URLs to access the model.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/urls-model.png" alt="URLs to Access the Model" width="600">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_testing_the_model"><a class="anchor" href="#_testing_the_model"></a>Testing the Model</h3>
+<div class="paragraph">
+<p>At this point, you can access the model by deploying an application inside the cluster and pointing to the REST or gRPC URL, depending on the client technology used by the client.</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ve created a notebook requesting the deployed model for this deep dive.
+It is in the <code>3_rest_requests_multi_model.ipynb</code> file.
+Open it, and run it (<strong>Run</strong> &gt; <strong>Run All Cells</strong>) to validate the possible communication.</p>
+</div>
+<div class="paragraph">
+<p>If you inspect the output result, you&#8217;ll see some transactions considered fraud.</p>
+</div>
+<div class="paragraph">
+<p>So far, everything has been executed manually from the Jupyter Notebook, but OpenShift AI supports Kubeflow pipelines (<em>kfp</em>) to automate the training model in a CI/CD fashion.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="02-intro.html">2. Introduction</a></span>
+  <span class="next"><a href="04-pipelines.html">4. Data Science Pipeline</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

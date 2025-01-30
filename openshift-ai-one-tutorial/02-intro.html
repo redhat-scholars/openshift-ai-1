@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Introduction :: OpenShift AI Part 1</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/openshift-ai-1/openshift-ai-one-tutorial/02-intro.html">
+    <link rel="prev" href="01-setup.html">
+    <link rel="next" href="03-ai.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://redhat-scholars.github.io/openshift-ai-1">OpenShift AI Part 1</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="openshift-ai-one-tutorial" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-setup.html">1. Get Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-setup.html#prerequisite">Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-setup.html#downloadtutorial">Get tutorial sources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-intro.html">2. Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#openshiftai">OpenShift AI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-ai.html">3. OpenShift AI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-ai.html#workbench">Creating a workbench</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-ai.html#deploying">Deploying a model</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-pipelines.html">4. Data Science Pipeline</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-pipelines.html#enablepipelines">Enabling Data Science Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-pipelines.html#runpipelines">Running a Data Science Pipeline</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift AI Part 1</a></li>
+    <li><a href="02-intro.html">2. Introduction</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-ai-1/edit/master/documentation/modules/ROOT/pages/02-intro.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Introduction</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this deep dive you&#8217;ll learn how to leverage OpenShift AI to train a sample model in JupyterLab, deploy it, and enhance it through automated pipelines.</p>
+</div>
+<div class="paragraph">
+<p>The model will be a fraud detection model trained to determine whether a transaction is fraudulent.</p>
+</div>
+<div class="paragraph">
+<p>The fraud detection model example monitors credit card transactions to identify potential fraudulent activity. It evaluates the following transaction details stored in a CSV file:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The geographic distance between the current transaction and the previous one.</p>
+</li>
+<li>
+<p>How does the current transaction amount compare to the median value of all the users' transactions?</p>
+</li>
+<li>
+<p>The payment method used, such as the credit card&#8217;s hardware chip, PIN entry, or an online purchase.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Using this data, the model calculates the probability of fraudulent transactions.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="openshiftai"><a class="anchor" href="#openshiftai"></a>OpenShift AI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In xref:01-setup.adoc#prerequisite, you registered for a Red Hat Sandbox account; after you log in to the Sandbox, under Available services, in the <em>Red Hat OpenShift AI</em> card, click <strong>Launch</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/sandbox-rhoai-tile.png" alt="Available services" width="600">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+During this deep dive, you&#8217;ll need to access Red Hat OpenShift, too (not only OpenShift AI), so if you haven&#8217;t done so already during the setup section, click the <strong>Launch</strong> button under the <em>Red Hat OpenShift</em> card.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>At the OpenShift AI dashboard, you should see something similar to the following figure, but with your <code>username</code>-dev as the project name:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ai-dashboard.png" alt="AI Dashboard" width="600">
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you are not using Red Hat Sandbox, create the project manually.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then click on the project name to see the details of the project.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ds-project-new.png" alt="Project Details" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>There are multiple tabs that we&#8217;ll explore during the deep dive, but they can be summarized as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Workbenches are your development and experimentation environment, often equipped with integrated development environments (IDEs) like JupyterLab, RStudio, and Visual Studio Code.</p>
+</li>
+<li>
+<p>Pipelines encompass the data science workflows that are executed within the project.</p>
+</li>
+<li>
+<p>Models enable you to deploy trained models for real-time inference efficiently. A single data science project can support multiple model servers, each capable of hosting several models.</p>
+</li>
+<li>
+<p>Cluster storage provides a persistent volume that retains the files and data you work on within a workbench. Each workbench can access one or more cluster storage instances.</p>
+</li>
+<li>
+<p>Connections store the configuration parameters to link to data sources, such as an S3 object bucket.</p>
+</li>
+<li>
+<p>Permissions determine which users and groups can access the project and its resources.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Before starting to use the AI part per se, you need to create a repository for storing the trained model and the pipeline artifacts. This repository can be an AWS S3 object storage bucket.</p>
+</div>
+<div class="paragraph">
+<p>For this deep dive, you&#8217;ll deploy a Minio instance, which offers a compatible AWS S3 API, but you deploy it locally.</p>
+</div>
+<div class="sect2">
+<h3 id="minio"><a class="anchor" href="#minio"></a>Minio</h3>
+<div class="paragraph">
+<p>To install Minio, go to the OpenShift console (you opened at the beginning of the deep dive), go to Developers View, and then open Web Console by pushing the icon located at the top-right of the menu:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/icon-web-terminal.png" alt="Open Web Terminal" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>When you click the icon, a bottom window is opened where you can type <code>oc</code> commands.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/web-terminal.png" alt="Web Terminal" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Inside the terminal, run the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f <a href="https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3.yaml" class="bare">https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3.yaml</a></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This manifest installs and configures Minio and creates Kubernetes Secrets to access this instance.</p>
+</div>
+<div class="paragraph">
+<p>After some seconds, the Minio instance is up and running, and you can go back to the OpenShift AI tab.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="01-setup.html">1. Get Started</a></span>
+  <span class="next"><a href="03-ai.html">3. OpenShift AI</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
