@@ -1,0 +1,68 @@
+= Data Science Pipeline
+include::_attributes.adoc[]
+
+Creating pipelines using version-controlled, shareable code is often a preferred approach. The Kubeflow Pipelines (kfp) SDK offers a Python API for building pipelines, which is available as a Python package that can be installed via the pip install kfp command. 
+Using this package, you can write Python code to define a pipeline, compile it into YAML format, and then import it into OpenShift AI.
+
+This deep dive does not focus on the specifics of using the SDK. 
+Instead, it supplies the necessary files for you to review and upload.
+
+[#enablepipelines]
+== Enabling Data Science Pipelines
+
+In this section, you prepare your environment to train a model automatically using data science pipelines.
+
+In the OpenShift AI dashboard, on the Fraud Detection page, click the _Pipelines_ tab.
+
+image::pipeline-menu.png[Pipelines, 600]
+
+Click _Configure pipeline server_ button.
+
+image::create-pipeline-server.png[Create Pipeline, 600]
+
+In the *Configure Pipeline Server* form, locate the _Access Key_ field marked by the key icon. 
+Open the dropdown menu and select _Pipeline Artifacts_ to automatically fill the form with the necessary credentials for the connection.
+
+image::create-pipeline-server-form.png[Fill Create Pipeline Form, 600]
+
+Click _Configure pipeline server_, and wait until the loading spinner disappears and _Start by importing a pipeline_ is displayed.
+It is not necessary to click to push the _Start by importing a pipeline_ button, but when enabled, it indicates that the pipeline server is ready.
+
+This process might take 5 minutes.
+
+[#runpipelines]
+== Running a Data Science Pipeline
+
+From your Jupyter environment, download the `7_get_data_train_upload.py` file to your local disk by selecting the file, right-clicking your mouse, and selecting `Download`.
+
+image::download-pipeline.png[Download Pipeline, 600]
+
+Then, import this file into the created Pipeline, go again to the *Pipelines* tab, and push the *Import Pipeline* button.
+
+image::pipeline-import.png[Pipeline Import, 600]
+
+Then fill the form with a *Pipeline name* and *Pipeline description*.
+Click *Upload* and select `7_get_data_train_upload.yaml` from your local files to upload the pipeline.
+Finally, click the *Import pipeline* button to import and save the pipeline.
+
+image::pipeline-import-upload.png[Pipeline Import form, 600]
+
+The pipeline is registered but not executed till you create a _run_.
+
+Expand the pipeline item, click the action menu (*⋮*), and then select *View runs*.
+
+image::pipeline-view-runs.png[Pipeline Run, 600]
+
+Click *Create run* and fill the form with the following values:
+
+*Experiment*: leave the default Default value
+*Name*: Run 1
+*Pipeline*: Select the pipeline that you uploaded
+
+You can leave the other fields with their default values.
+
+image::pipeline-create-run-form.png[Create Run, 600]
+
+After creating the run, the pipeline is executed automatically. It gets training data, retrains the model with the new data, and publishes it.
+
+image::pipeline-run-in-progress.png[Create Run, 600]

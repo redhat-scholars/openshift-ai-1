@@ -1,5 +1,5 @@
-name: template-tutorial
-title: Template Tutorial
+name: openshift-ai-one-tutorial
+title: OpenShift AI Part 1
 version: master
 nav:
   - modules/ROOT/nav.adoc

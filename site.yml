@@ -2,9 +2,9 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  title: Template Tutorial
-  url: https://redhat-scholars.github.io/course-template
-  start_page: template-tutorial::index.adoc
+  title: OpenShift AI Part 1
+  url: https://redhat-scholars.github.io/openshift-ai-1
+  start_page: openshift-ai-one-tutorial::index.adoc
 
 content:
   sources:

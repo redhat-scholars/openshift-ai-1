@@ -1,7 +1,15 @@
-* xref:01-setup.adoc[1. Setup]
+* xref:01-setup.adoc[1. Get Started]
 ** xref:01-setup.adoc#prerequisite[Prerequisites]
-** xref:01-setup.adoc#minikube[Setup Minikube]
+** xref:01-setup.adoc#downloadtutorial[Get tutorial sources]
 
-* xref:02-deploy.adoc[2. Deploy Service]
-** xref:02-deploy.adoc#package[Build Service]
-** xref:02-deploy.adoc#deploy[Deploy Dervice]
+
+* xref:02-intro.adoc[2. Introduction]
+** xref:02-intro.adoc#openshiftai[OpenShift AI]
+
+* xref:03-ai.adoc[3. OpenShift AI]
+** xref:03-ai.adoc#workbench[Creating a workbench]
+** xref:03-ai.adoc#deploying[Deploying a model]
+
+* xref:04-pipelines.adoc[4. Data Science Pipeline]
+** xref:04-pipelines.adoc#enablepipelines[Enabling Data Science Pipeline]
+** xref:04-pipelines.adoc#runpipelines[Running a Data Science Pipeline]

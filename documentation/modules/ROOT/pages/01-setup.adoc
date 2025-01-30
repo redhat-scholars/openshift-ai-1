@@ -2,28 +2,16 @@
 include::_attributes.adoc[]
 
 [#prerequisite]
-== Prerequisite CLI tools
+== Prerequisites
 
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/prerequisites-kubernetes.adoc[]
-|===
+To run this deep dive you need an OpenShift cluster with OpenShift AI installed.
+There is one free public cloud cluster named Red Hat Sandbox with OpenShift AI installed.
 
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/optional-requisites.adoc[]
-|===
-
-[#minikube]
-== Setup Kubernetes
-
-:profile: my_profile
-
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/kubernetes-setup.adoc[]
-
-And then you are ready for start using Kubernetes:
-
-image::kubelogo.png[]
+include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/refs/heads/main/sandbox.adoc[]
 
 [#downloadtutorial]
 == Get tutorial sources
 
-:tutorial-url: https://github.com/redhat-developer-demos/rhd-tutorial-common.git
-:folder: my_folder
+:tutorial-url: https://github.com/redhat-scholars/openshift-ai-1.git
+:folder: deep_dive
 include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/download-sources.adoc[]

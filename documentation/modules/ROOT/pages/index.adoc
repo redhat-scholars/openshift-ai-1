@@ -1,20 +1,31 @@
-= Welcome to Template Tutorial
+= Welcome to OpenShift AI part I Tutorial
 :page-layout: home
 :!sectids:
 
 [.text-center.strong]
-== Publish Services to Kubernetes
+== Deploy Models using OpenShift AI
 
-A Kubernetes tutorial to show how you can deploy a Java service to a Kubernetes cluster as it was a child game.
+In this deep dive you'll learn how to leverage OpenShift AI to train a sample model in JupyterLab, deploy it, and enhance it through automated pipelines.
 
 [.tiles.browse]
 == Browse modules
 
 [.tile]
 .xref:01-setup.adoc[Get Started]
-* xref:01-setup.adoc#minikube[Minikube]
+* xref:01-setup.adoc#prerequisite[Prerequisites]
+* xref:01-setup.adoc#downloadtutorial[Get tutorial sources]
+
 
 [.tile]
-.xref:02-deploy.adoc[Deploying]
-* xref:02-deploy.adoc#package[Package the Application]
-* xref:02-deploy.adoc#deploy[Deploy the Application]
+.xref:02-intro.adoc[Introduction]
+* xref:02-intro.adoc#openshiftai[OpenShift AI]
+
+[.tile]
+.xref:03-ai.adoc[OpenShift AI]
+* xref:03-ai.adoc#workbench[Creating a workbench]
+* xref:03-ai.adoc#deploying[Deploying a model]
+
+[.tile]
+.xref:04-pipelines.adoc[Data Science Pipeline]
+* xref:04-pipelines.adoc#enablepipelines[Enabling Data Science Pipeline]
+* xref:04-pipelines.adoc#runpipelines[Running a Data Science Pipeline]
